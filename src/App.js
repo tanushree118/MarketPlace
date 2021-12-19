@@ -1,24 +1,41 @@
-import logo from './logo.svg';
+import React, {useState} from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Home from './Components/Home';
+import Cart from './Components/Cart';
+import Checkout from './Components/Checkout';
 import './App.css';
 
-function App() {
+
+const App = ({products}) => {
+  const [cartList, setCartList] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <nav >
+          <Link to="/Home" >Home</Link>
+          <Link to="/cart" >Cart</Link>
+          <Link to="/checkout" >Checkout</Link>
+        </nav>
+        <Switch>
+          <Route path="/checkout">
+            <Checkout products={products}/>
+          </Route>
+          <Route path="/cart">
+            <Cart products={products} cartList={cartList} setCartList={setCartList}/>
+          </Route>
+          <Route path="/Home">
+            {/* <Home products={products}/> */}
+            <Home products={products} cartList={cartList} setCartList={setCartList}/>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

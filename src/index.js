@@ -1,12 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { IntlProvider } from 'react-intl';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const products = [
+  { name: 'Bat', price: 50, quantity: 10 },
+  { name: 'Ball', price: 50, quantity: 14 },
+  { name: 'Gloves', price: 30, quantity: 34 },
+  { name: 'Wickets', price: 50, quantity: 40 },
+  { name: 'Cap', price: 20, quantity: 43 },
+  { name: 'Helmet', price: 100, quantity: 22 },
+]
+
+  // window.localStorage.removeItem('cartList');
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <IntlProvider locale='en'>
+      <App products={products}/>
+    </IntlProvider>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );
